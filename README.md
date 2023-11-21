@@ -34,9 +34,84 @@ These are some of the Sql Features used;
 --Question 1: What are the total number of countries involved in deforestation? 
 
 Select Distinct (country_name)  As No_of_country_involved_in_deforestation From [forest_area (1)]
+
 Where country_name <> 'world';
 
-![]()
+![](No_Of_Countries.png)
+
+![](No_Of_Countries2.png)
+
+Insight: The total no of rows shown for this result was first 218, Therefore I had to put <> world because world is not a country, So the total number of countries involved in deforestation is 218 countries.
 
 
+-- Question 2: Show the income groups of countries having total area ranging from 75,000 to 150,000 square meter?
+
+SELECT b.country_name, b.total_area_sq_mi, c.income_group
+
+FROM [land_area (1)] b
+
+JOIN [regions (1)] c ON b.country_name = c.country_name
+
+WHERE b.total_area_sq_mi BETWEEN 75000 AND 150000;
+
+![](Countries_Having_area_Btw_75000_150000)
+
+Insight: 25 countries are in this category,but it is shown across different years.
+
+-- Question 3: Calculate average area in square miles for countries in the 'upper middle income region'. Compare the result with the rest of the income categories.
+
+Select c.income_group,Avg(total_area_sq_mi) As Avg_Area_For_Upper_Middle_income_group 
+
+From [land_area (1)] b Join [regions (1)] c On b.country_name = c.country_name
+
+Where c.income_group Like 'upper middle income'
+
+Group By c.Income_group;
+
+--For Others
+
+Select c.income_group,Avg(total_area_sq_mi) As Avg_Area_For_Upper_Middle_income_group 
+
+From [land_area (1)] b Join [regions (1)] c On b.country_name = c.country_name
+
+Where c.income_group !='upper middle income' And c.income_group != 'Null'
+
+Group By c.Income_group
+
+Order By  Avg(total_area_sq_mi);
+
+![](Avg_Area_For_Upper_Middle_income_group.png)
+
+![](Avg_Area_For_Upper_Middle_income_group_For_others.png)
+
+Insight: There is substantial difference in land area between Upper Middle Income countries and others in income groups.The countries in other income group should necessitate a strategic approach to land management.'
+
+-- Question 4: Determine the total forest area in square km for countries in the 'high income' group. Compare result with the rest of the income categories.
+
+SELECT c.income_group,SUM(forest_area_sqkm) AS total_forest_area
+
+FROM [forest_area (1)] a Join [regions (1)] c On a.country_name = c.country_name
+
+WHERE	income_group = 'high Income' And forest_area_sqkm IS NOT NULL AND income_group != 'NULL'
+
+GROUP BY income_group;
+
+--Other Income groups
+
+SELECT c.income_group,SUM(forest_area_sqkm) AS total_forest_area
+
+FROM [forest_area (1)] a Join [regions (1)] c On a.country_name = c.country_name
+
+WHERE forest_area_sqkm IS NOT NULL
+     
+      AND income_group != 'NULL'
+	 
+   AND income_group != 'high Income' 
+
+GROUP BY income_group;
+
+![](total_forest_area_across_incomw_group.png)
+
+Insight: The countries in the high income group are ranked has the second largest in terms of forest area. These countries should try to achieve a harmonious balance between economic prosperity and environmental conservation.
+ 
 
