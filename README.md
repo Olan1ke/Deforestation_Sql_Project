@@ -172,7 +172,123 @@ Order By  year desc;
 
 ![](percentage_change_2.png)
 
-Insights: No significance difference in over the years.this shows that there was successful conservation efforts in all the country over the years.
+Insights: No significance difference in over the years in percentage change in forest area compare to land area.this shows that there was successful conservation efforts in all the country over the years.
+
+
+-- Question 7: How does the forest area vary across each year?
+
+SELECT year,SUM(forest_area_sqkm) AS total_forest_area
+
+FROM [forest_area (1)]
+
+WHERE forest_area_sqkm IS NOT NULL AND year IS NOT NULL
+
+GROUP BY year
+
+Order By total_forest_area Desc;
+
+![](total_forest_area_across_the_year.png)
+
+![](total_forest_area_across_the_year_2.png)
+
+Insight: There is a sight decrease in the change of forest area over the years. While the remaining forested areas may still contribute to the positive percentage change, the overall quality and ecological value of the forests may be compromised.
+
+-- Question 8:  Which countries have the highest and lowest forest area in the latest available year and show their income group?
+
+WITH RankedCountries AS (
+  
+    SELECT
+       
+	a.country_name,c.income_group,
+       
+	a.forest_area_sqkm,
+        
+	RANK() OVER (ORDER BY forest_area_sqkm DESC) AS rank_highest,
+        
+	RANK() OVER (ORDER BY forest_area_sqkm ASC) AS rank_lowest
+    
+    FROM [forest_area (1)] a  Join [regions (1)] c ON a.country_name = c.country_name
+       
+	WHERE forest_area_sqkm IS NOT NULL And a.country_name <> 'world'
+          
+	  AND year = (SELECT MAX(year) FROM [forest_area (1)]  WHERE forest_area_sqkm IS NOT NULL)
+	
+ )
+
+SELECT country_name,income_group,forest_area_sqkm,'Highest' AS ranking_type
+
+FROM RankedCountries
+
+WHERE rank_highest = 1
+
+UNION ALL
+
+SELECT country_name,income_group,forest_area_sqkm,'Lowest' AS ranking_type
+
+FROM RankedCountries
+
+WHERE rank_lowest = 1; 
+
+![](highest_lowest_forest_area.png)
+
+Insights: Russia Federation's has as an upper-middle-income country with extensive forests suggests a potential alignment between economic development and sustainable forest management practices. The country may have implemented policies that balance economic growth with conservation efforts, contributing to the maintenance of substantial forested areas.
+
+The Faroe Islands has as a high-income country with limited forest area raises questions about the challenges of environmental conservation in regions with specific ecological constraints.Strategies for sustainable land use and conservation in such areas may need to address unique environmental challenges.
+
+
+-- Question 9:  Compare the average total land area of the two African region .
+
+WITH Subsaharanafrica AS (
+    
+    SELECT DISTINCT b.country_name, c.income_group,b.total_area_sq_mi
+    
+    FROM [land_area (1)] b join [regions (1)] c on b.country_name = c.country_name
+    
+    WHERE region = 'Sub-saharan Africa' AND total_area_sq_mi IS NOT NULL)
+
+SELECT AVG(total_area_sq_mi) AS avg_area_Sub_saharan_Africa
+
+FROM Subsaharanafrica;
+
+WITH MiddleEastNorthAfrica AS (
+    
+    SELECT DISTINCT b.country_name, c.income_group, b.total_area_sq_mi
+    
+    FROM [land_area (1)] b join [regions (1)] c on b.country_name = c.country_name
+    
+    WHERE region = 'Middle East & North Africa' AND total_area_sq_mi IS NOT NULL)
+
+SELECT AVG(total_area_sq_mi) AS avg_area_Middle_East_North_Africa
+
+FROM MiddleEastNorthAfrica;
+
+![](Avg_Area_For_Two_africa_region.png)
+
+Insight: The average total land area in Subsaharanafrica region is higher than MiddleEastNorthAfrican region.
+
+The Sub-Saharan Africa regionexhibits a higher average total land area. The vastness of landscapes, including extensive savannas, forests, and deserts, contributes to the overall larger land area. The larger land area suggests potential economic and agricultural opportunities, including space for cultivation, diverse ecosystems supporting various industries, and potential for sustainable land use practices.
+
+The Middle East-North Africa region, characterized by arid and semi-arid climates, showcases a comparatively smaller average total land area. Geographical constraints such as the presence of large deserts and mountainous terrain, may contribute to the reduced overall land area. The land resources may be more limited, economic activities may need to be carefully managed and diversified.
+
+
+--Question 10: Show the income group of countries that have forest area more than 20,000,000sqkm
+
+Select a.country_name, income_group,Sum(forest_area_sqkm) as total_forest_area
+
+From [forest_area (1)] a Join [regions (1)] c ON a.country_name = c.country_name
+
+Where a.country_name != 'world'
+
+Group By income_group,a.country_name
+
+Having Sum(forest_area_sqkm) > 20000000
+
+Order By total_forest_area Desc;
+
+![](total_forest_area _above_20000000.png)
+
+Insight: 
+
 
 
  
