@@ -39,9 +39,9 @@ Select Distinct (country_name)  As No_of_country_involved_in_deforestation From 
 Where country_name <> 'world';
 
 
-![](No_Of_Countries.png)
+![](No_Of_Countries_1.png)
 
-![](No_Of_Countries2.png)
+![](No_Of_Countries_2.png)
 
 Insight: The total no of rows shown for this result was first 218, Therefore I had to put <> world because world is not a country, So the total number of countries involved in deforestation is 218 countries.
 
