@@ -28,6 +28,7 @@ These are some of the Sql Features used;
 - Window Function
 - Sub query
 - Having
+- Aggregate Functions
 
 ## Problem Solved
 
@@ -113,5 +114,66 @@ GROUP BY income_group;
 ![](total_forest_area_across_incomw_group.png)
 
 Insight: The countries in the high income group are ranked has the second largest in terms of forest area. These countries should try to achieve a harmonious balance between economic prosperity and environmental conservation.
+
+
+-- Question 5: Show countries from each region(continent) having the highest total forest areas. 
+
+WITH RankedCountries AS (
+   
+    SELECT a.country_name, c.region, a.forest_area_sqkm,
+      
+	ROW_NUMBER() OVER (PARTITION BY region ORDER BY forest_area_sqkm DESC) AS rank_within_region
+    
+    FROM [forest_area (1)] a Join [regions (1)] c On a.country_name = c.country_name
+      
+      Where  a.forest_area_sqkm IS NOT NULL And a.country_name != 'World' 
+
+)
+
+SELECT country_name,region,forest_area_sqkm
+
+FROM RankedCountries
+
+WHERE rank_within_region = 1;
+
+![](rank_within_region_png)
+
+Insight: The country with the largest forest area is russian Federation from Europe & Central Asia Region while the country with the lowest forest area is India from South Asia Region.
+
+	-- Question 6: What is the percentage change in forest area compared to the total land area for year 2016, Compare to other years?
+
+SELECT b.year,((SUM(forest_area_sqkm) / NULLIF(SUM(total_area_sq_mi), 0)) * 100) AS percentage_change
+
+FROM [forest_area (1)] a Join [land_area (1)] b on a.country_name = b.country_name 
+
+Join [regions (1)] c on a.country_name = b.country_name
+
+WHERE a.forest_area_sqkm IS NOT NULL AND b.total_area_sq_mi IS NOT NULL AND b.year = 2016
+
+Group By b.year
+
+Order By  percentage_change desc;
+
+--OTHER YEARS
+
+SELECT b.year,((SUM(forest_area_sqkm) / NULLIF(SUM(total_area_sq_mi), 0)) * 100) AS percentage_change
+
+FROM [forest_area (1)] a Join [land_area (1)] b on a.country_name = b.country_name 
+
+Join [regions (1)] c on a.country_name = b.country_name
+
+WHERE a.forest_area_sqkm IS NOT NULL AND b.total_area_sq_mi IS NOT NULL AND b.year <> 2016
+
+Group By b.year
+
+Order By  year desc;
+
+![](percentage_change.png)
+
+![](percentage_change_2.png)
+
+Insights: No significance difference in over the years.this shows that there was successful conservation efforts in all the country over the years.
+
+
  
 
