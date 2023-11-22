@@ -34,9 +34,10 @@ These are some of the Sql Features used;
 
 --Question 1: What are the total number of countries involved in deforestation? 
 
-Select Distinct (country_name)  As No_of_country_involved_in_deforestation From [forest_area (1)]
+Select Distinct (country_name)  As No_of_country_involved_in_deforestation From [regions (1)]
 
 Where country_name <> 'world';
+
 
 ![](No_Of_Countries.png)
 
