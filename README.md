@@ -174,6 +174,8 @@ Order By  year desc;
 
 Insights: No significance difference in over the years in percentage change in forest area compare to land area.this shows that there was successful conservation efforts in all the country over the years.
 
+Note: The "percentage change in forest area compared to the total land area" represents how much the forest area has changed relative to the total land area over a given period of time. 
+
 
 -- Question 7: How does the forest area vary across each year?
 
@@ -291,5 +293,23 @@ Insight: There Eight (8) countries in this category,Majority of those countries 
 
 
 ## Conclusion
+In the 3 tables for the Analysis.
+
+![](3Tables.png)
+
+The null values in this data set is too much,there we may not be able to get appropriate analysis. The country name and country code are all in the table making these column name ambigious. I had to put aliases on all table name to make it unique. For future reference all table should have it on primary and foreign key.
+
+The dominance of upper-middle-income countries having more forest areas suggests a potential correlation between economic development and the capacity to preserve extensive forested areas.The lower-income countries having lower forest area raises questions about the challenges faced by nations with fewer economic resources in preserving large forested areas.
+
+I notice while there is postive change in percentage change of forest area compared to the total land area but there a decrease in total forest area over time.
+The decrease in actual forest area may also be associated with fragmentation or degradation of existing forests,
+While the remaining forested areas may still contribute to the positive percentage change, the overall quality and ecological value of the forests may be compromised.
+
+ A comprehensive analysis is crucial to understand the underlying factors and effective conservation measures to ensure the long-term sustainability of forest ecosystems.
+
+
+
+
+
  
 
