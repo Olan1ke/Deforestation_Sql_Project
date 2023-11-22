@@ -287,9 +287,9 @@ Order By total_forest_area Desc;
 
 ![](total_forest_area _above_20000000.png)
 
-Insight: 
+Insight: There Eight (8) countries in this category,Majority of those countries are in the upper middle group while lower income group is the the least. Lower income countries may encounter obstacles related to funding, infrastructure, and competing land use demands, making it harder to maintain extensive forest cover.
 
 
-
+## Conclusion
  
 
