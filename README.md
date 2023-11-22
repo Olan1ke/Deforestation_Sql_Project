@@ -141,7 +141,7 @@ WHERE rank_within_region = 1;
 
 Insight: The country with the largest forest area is russian Federation from Europe & Central Asia Region while the country with the lowest forest area is India from South Asia Region.
 
-	-- Question 6: What is the percentage change in forest area compared to the total land area for year 2016, Compare to other years?
+-- Question 6: What is the percentage change in forest area compared to the total land area for year 2016, Compare to other years?
 
 SELECT b.year,((SUM(forest_area_sqkm) / NULLIF(SUM(total_area_sq_mi), 0)) * 100) AS percentage_change
 
@@ -168,6 +168,8 @@ WHERE a.forest_area_sqkm IS NOT NULL AND b.total_area_sq_mi IS NOT NULL AND b.ye
 Group By b.year
 
 Order By  year desc;
+
+![](percentage_change_1.png)
 
 ![](percentage_change.png)
 
