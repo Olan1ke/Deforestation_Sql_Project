@@ -45,7 +45,7 @@ Where country_name <> 'world';
 
 ![](No_Of_Countries_2.png)
 
-Insight: The total no of rows shown for this result was first 218, Therefore I had to put <> world because world is not a country, So the total number of countries involved in deforestation is 218 countries.
+Insight: The total no of rows shown for this result was first 219, Therefore I had to put <> world because world is not a country, So the total number of countries involved in deforestation is 218 countries.
 
 
 -- Question 2: Show the income groups of countries having total area ranging from 75,000 to 150,000 square meter?
