@@ -2,7 +2,9 @@
 
 ## Introduction
 
-Deforestation is the process of clearing or removing a significant portion of a forest for human activities such as agriculture, logging, urban development, or infrastructure expansion.This is an SQL Project on Deforestation of diffferent countries around the world from year 1990-2016. We have three tables, the forest area table, the land area table and the region area.They all have four column each; The forest area table:country code,country name, year, forest area in sq/km, The land area table:country code,country name, year, land area in sq/mi, The region table: country code,country name,region(the region the countries are located),income group.
+Deforestation is the process of clearing or removing a significant portion of a forest for human activities such as agriculture, logging, urban development, or infrastructure expansion.
+
+This is an SQL Project on Deforestation of diffferent countries around the world from year 1990-2016. We have three tables, the forest area table, the land area table and the region area.They all have four column each; The forest area table:country code,country name, year, forest area in sq/km, The land area table:country code,country name, year, land area in sq/mi, The region table: country code,country name,region(the region the countries are located),income group.
         
 This analysis Project is to help  us reveal how deforestation rates have evolved in each country over successive years,Investigate the relationship between income groups and deforestation over time.
 
